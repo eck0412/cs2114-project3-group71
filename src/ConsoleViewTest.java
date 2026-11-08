@@ -7,6 +7,10 @@ import student.TestCase;
 
 /**
  * Tests the text displayed and input read by ConsoleView.
+ *
+ * 
+ *  @author erikkwon
+ *  @version Nov 8, 2026
  */
 public class ConsoleViewTest extends TestCase
 {
@@ -41,10 +45,9 @@ public class ConsoleViewTest extends TestCase
         view.showMenu();
 
         String text = outputBytes.toString();
-        assertTrue(text.contains("TAline"));
-        assertTrue(text.contains("Submit a help request"));
-        assertTrue(text.contains("Show waiting line"));
-        assertTrue(text.contains("Exit"));
+        assertTrue(text.contains("=== TAline ==="));
+        assertTrue(text.contains("1. Submit a help request"));
+        assertTrue(text.contains("0. Exit"));
     }
 
 
