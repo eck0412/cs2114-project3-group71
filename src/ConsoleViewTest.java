@@ -113,8 +113,21 @@ public class ConsoleViewTest extends TestCase
 
         String text = outputBytes.toString();
         assertTrue(text.contains("Currently helping: Alice"));
-        assertTrue(text.contains("1. Bob"));
-        assertTrue(text.contains("2. Casey"));
+        assertTrue(text.contains("1. Bob — request #2, seat B2"));
+        assertTrue(text.contains("2. Casey — request #3, seat C3"));
         assertTrue(text.indexOf("1. Bob") < text.indexOf("2. Casey"));
     }
+    
+    /**
+     * Tests an active request with no waiting students
+     */
+    public void testShowLineWithActiveRequestAndNoWaitingStudents() {
+        HelpRequest active = new HelpRequest(1,"S1","Alice","A1","Question 1");
+        view.showLine(Collections.<HelpRequest>emptyList(),active);
+        
+        String text = outputBytes.toString();
+        assertTrue(text.contains("Currently helping: Alice (request #1)"));
+        assertTrue(text.contains("Waiting line is empty."));
+    }
+
 }
