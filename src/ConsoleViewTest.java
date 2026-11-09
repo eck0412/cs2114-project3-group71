@@ -8,23 +8,21 @@ import student.TestCase;
 /**
  * Tests the text displayed and input read by ConsoleView.
  *
- * 
- *  @author erikkwon
- *  @version Nov 8, 2026
+ * @author erikkwon
+ * @version Nov 8, 2026
  */
-public class ConsoleViewTest extends TestCase
+public class ConsoleViewTest
+    extends TestCase
 {
-    //~ Fields ................................................................
+    // ~ Fields ................................................................
     private ByteArrayOutputStream outputBytes;
     private PrintStream output;
     private ConsoleView view;
 
-
-    //~ Constructors ..........................................................
+    // ~ Constructors ..........................................................
     // TestCase creates this test class.
 
-
-    //~ Public Methods ........................................................
+    // ~ Public Methods ........................................................
 
     /**
      * Creates a fresh view before each test.
@@ -79,8 +77,7 @@ public class ConsoleViewTest extends TestCase
     {
         view.showMessage("No students are waiting.");
 
-        assertTrue(
-            outputBytes.toString().contains("No students are waiting."));
+        assertTrue(outputBytes.toString().contains("No students are waiting."));
     }
 
 
@@ -89,7 +86,7 @@ public class ConsoleViewTest extends TestCase
      */
     public void testShowEmptyLine()
     {
-        view.showLine(Collections.<HelpRequest>emptyList(), null);
+        view.showLine(Collections.<HelpRequest> emptyList(), null);
 
         String text = outputBytes.toString();
         assertTrue(text.contains("Currently helping: nobody"));
@@ -104,8 +101,7 @@ public class ConsoleViewTest extends TestCase
     {
         HelpRequest active =
             new HelpRequest(1, "S1", "Alice", "A1", "Question 1");
-        HelpRequest first =
-            new HelpRequest(2, "S2", "Bob", "B2", "Question 2");
+        HelpRequest first = new HelpRequest(2, "S2", "Bob", "B2", "Question 2");
         HelpRequest second =
             new HelpRequest(3, "S3", "Casey", "C3", "Question 3");
 
@@ -117,14 +113,17 @@ public class ConsoleViewTest extends TestCase
         assertTrue(text.contains("2. Casey — request #3, seat C3"));
         assertTrue(text.indexOf("1. Bob") < text.indexOf("2. Casey"));
     }
-    
+
+
     /**
      * Tests an active request with no waiting students
      */
-    public void testShowLineWithActiveRequestAndNoWaitingStudents() {
-        HelpRequest active = new HelpRequest(1,"S1","Alice","A1","Question 1");
-        view.showLine(Collections.<HelpRequest>emptyList(),active);
-        
+    public void testShowLineWithActiveRequestAndNoWaitingStudents()
+    {
+        HelpRequest active =
+            new HelpRequest(1, "S1", "Alice", "A1", "Question 1");
+        view.showLine(Collections.<HelpRequest> emptyList(), active);
+
         String text = outputBytes.toString();
         assertTrue(text.contains("Currently helping: Alice (request #1)"));
         assertTrue(text.contains("Waiting line is empty."));
