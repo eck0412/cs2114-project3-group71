@@ -13,6 +13,6 @@
 | `ConsoleViewTest.java` | Erik | Wrote tests for console input and displayed output. |
 | `LabController.java` | Stefan | Connected the view to the model and handled menu actions. |
 | `LabControllerTest.java` | Stefan | Wrote tests for controller actions and input handling. |
-| `TAline.java` | To confirm | Added the application entry point. |
+| `TAline.java` | Erik | Added the application entry point. |
 
 **GenAI note:** GenAI helped draft and review parts of the TALine code, tests, and documentation. Team members reviewed the suggestions and are responsible for checking their own files.
