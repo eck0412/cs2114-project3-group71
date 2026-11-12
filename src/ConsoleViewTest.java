@@ -128,5 +128,16 @@ public class ConsoleViewTest
         assertTrue(text.contains("Currently helping: Alice (request #1)"));
         assertTrue(text.contains("Waiting line is empty."));
     }
+    
+    /**
+     * Tests the show estimated wait 
+     */
+    public void testShowEstimatedWait()
+    {
+        view.showEstimatedWait(2, 10);
+
+        assertTrue(outputBytes.toString().contains(
+            "Estimated wait for request #2: about 10 minutes."));
+    }
 
 }

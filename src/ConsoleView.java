@@ -46,6 +46,7 @@ public class ConsoleView
         output.println("4. Complete current request");
         output.println("5. Show waiting line");
         output.println("6. Check request position");
+        output.println("7. Estimate a request's wait");
         output.println("0. Exit");
     }
 
@@ -79,6 +80,22 @@ public class ConsoleView
     public void showMessage(String text)
     {
         output.println(text);
+    }
+
+
+    /**
+     * Displays the estimated wait for a waiting request.
+     *
+     * @param requestId
+     *            the request's ID
+     * @param minutes
+     *            the estimated wait in minutes
+     */
+    public void showEstimatedWait(long requestId, long minutes)
+    {
+        output.println(
+            "Estimated wait for request #" + requestId + ": about " + minutes
+                + " minutes.");
     }
 
 
