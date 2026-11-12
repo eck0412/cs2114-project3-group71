@@ -234,4 +234,32 @@ public class LabSession
     {
         return Optional.ofNullable(activeRequest);
     }
+
+
+    /**
+     * Estimates the wait for a request still in the line. Assumes 10 minutes
+     * per request ahead.
+     *
+     * @param requestId
+     *            the request to check
+     * @return estimated minutes, or -1 if not waiting
+     */
+    public long estimatedWaitMinutes(long requestId)
+    {
+        int position = positionOf(requestId);
+
+        if (position == -1)
+        {
+            return -1;
+        }
+
+        long requestsAhead = position - 1L;
+
+        if (activeRequest != null)
+        {
+            requestsAhead++;
+        }
+
+        return requestsAhead * 10L;
+    }
 }
