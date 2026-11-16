@@ -2,17 +2,15 @@
 
 Reflection
 
-We kept the specification’s model, view, and controller split. HelpRequest, LinkedQueue, and LabSession hold request data and rules; ConsoleView handles input and output; and LabController connects them. Validation remains in LabSession, with menu and request-ID parsing in the controller. The model does not depend on the view and can be tested on its own.
+We added estimated wait time as our non-trivial feature instead of the skip/requeue action named in our D3 plan. We made this change because wait time could be built from the queue position and active request already tracked by LabSession. The feature touched LabSession, LabController, ConsoleView, and their tests—the same layers we predicted for skip/requeue. HelpRequest and LinkedQueue did not need to change.
 
-We worked out the linked FIFO queue and how to display requests without putting queue logic in the view. Separate-device access, multiple TAs, wait estimates, and saving the line remain open. We still need LabSessionTest.java and a full check of the combined MVP, including invalid inputs and empty-queue actions.
+The model calculates the estimate; the view only displays it, so the model/view boundary still holds. The estimate assumes 10 minutes per request ahead and does not measure actual help time. Skip/requeue has not been added yet. We still need to confirm passing normal and bad-input tests for every core model and queue method in the combined project.
 
 Next Steps
 
-First, combine the team’s classes and verify submit, cancel, position, help next, and complete. Then add LabSessionTest.java, finish bad-input tests, and fix any failures.
+First, finish the required model tests and verify blank fields, invalid IDs, and empty-line actions. Then add and test skip/requeue if the team has time. For our three-minute demo, we will submit two requests, show their positions and estimated waits, call and complete the first student, and show how the second student’s estimate changes. We will also demonstrate a bad-input case and the passing model tests. If skip/requeue is completed, we will include it in the demo.
 
-For Deliverable 4, we plan to add skip and requeue, which moves the active request to the back of the line. We predict changes to LabSession, LabController, ConsoleView, and their tests, but not HelpRequest or LinkedQueue. New tests will cover skipping with other students waiting, skipping the only request, and trying to skip when none is active.
-
-Tue will review request tests; Vibha will handle queue and session logic and tests; Erik will update the view and its tests; and Stefan will handle controller changes and integration. We are deferring the other stretch goals.
+We are keeping estimated wait time and attempting skip/requeue. We are deferring separate-device access, multiple-TA coordination, and saving/restoring the line. Tue will review request tests; Vibha will finish model logic and tests; Erik will verify the view and its tests; and Stefan will handle controller integration and the demo.
 
 
 ## Attribution
