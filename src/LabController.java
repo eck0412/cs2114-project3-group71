@@ -55,17 +55,36 @@ public class LabController
                 switch (choice)
                 {
                     case 1:
-                        submit(
-                            view.ask("Student ID: "),
-                            view.ask("Student name: "),
-                            view.ask("Seat: "),
-                            view.ask("Question: "));
+                    {
+                        String studentId = askRequired("Student ID: ");
+                        if (studentId == null)
+                            return;
+
+                        String name = askRequired("Student name: ");
+                        if (name == null)
+                            return;
+
+                        String seat = askRequired("Seat: ");
+                        if (seat == null)
+                            return;
+
+                        String question = askRequired("Question: ");
+                        if (question == null)
+                            return;
+
+                        submit(studentId, name, seat, question);
                         break;
-                    case 2:
-                        cancel(
-                            view.ask("Request ID: "),
-                            view.ask("Student ID: "));
+                    }
+                    case 2: {
+                        String requestId = askRequired("Request ID: ");
+                        if (requestId == null) return;
+
+                        String studentId = askRequired("Student ID: ");
+                        if (studentId == null) return;
+
+                        cancel(requestId, studentId);
                         break;
+                    }
                     case 3:
                         helpNext();
                         break;
@@ -75,12 +94,20 @@ public class LabController
                     case 5:
                         showQueue();
                         break;
-                    case 6:
-                        showPosition(view.ask("Request ID: "));
+                    case 6: {
+                        String requestId = askRequired("Request ID: ");
+                        if (requestId == null) return;
+
+                        showPosition(requestId);
                         break;
-                    case 7:
-                        showEstimatedWait(view.ask("Request ID: "));
+                    }
+                    case 7: {
+                        String requestId = askRequired("Request ID: ");
+                        if (requestId == null) return;
+
+                        showEstimatedWait(requestId);
                         break;
+                    }
                     case 0:
                         running = false;
                         break;
@@ -275,6 +302,34 @@ public class LabController
         else
         {
             view.showEstimatedWait(requestId, minutes);
+        }
+    }
+
+
+    /**
+     * Repeats a prompt until the user enters something other than spaces.
+     *
+     * @param prompt
+     *            text to display
+     * @return the answer, or null if input ends
+     */
+    private String askRequired(String prompt)
+    {
+        while (true)
+        {
+            String answer = view.ask(prompt);
+
+            if (answer == null)
+            {
+                return null;
+            }
+
+            if (!answer.trim().isEmpty())
+            {
+                return answer;
+            }
+
+            view.showMessage("This field cannot be blank. Please try again.");
         }
     }
 }
